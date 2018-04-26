@@ -204,20 +204,24 @@ public class BoardTest {
 		}
 	}
 
-	
 	/* Test case to check already Deleted Player */
 	@Test
 	public void alreadyDeletedPlayer() {
 		try {
-			Board brdd = new Board();
-			brdd.registerPlayer("Aasif");
-			brdd.registerPlayer("Sharza");
-			JSONArray threePlayersJson = brdd.registerPlayer("Fatima");
-			//threePlayersJson.
-			System.out.println(threePlayersJson+"^^^^^^^^^^^^^^^^^$$$$$$$$$$$$$$$$$$$$$$");
-			
+			Board brd = new Board();
+			brd.registerPlayer("Aasif");
+			brd.registerPlayer("Sharza");
+			JSONArray threePlayersJson = brd.registerPlayer("Fatima");
+			System.out.println(threePlayersJson + "^^^^^^^^^^^^^^^^^$$$$$$$$$$$$$$$$$$$$$$");
+			JSONObject obj = threePlayersJson.getJSONObject(0);
+			String str = obj.getString("uuid");
+			UUID uuid = UUID.fromString(str);
+			JSONArray deletePlayer = brd.deletePlayer(uuid);
+
+			System.out.println(deletePlayer + "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.error(e);
 		}
 	}
 
@@ -271,4 +275,3 @@ public class BoardTest {
 		}
 	}
 }
-
